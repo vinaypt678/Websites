@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Businesspedia</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Custom scrollbar for a better light mode experience */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9; /* light gray for track */
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1; /* slate-300 for thumb */
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8; /* slate-400 for thumb hover */
+        }
+        body {
+            background-color: #f8fafc; /* light background */
+            color: #1e293b; /* dark text */
+            font-family: 'Inter', sans-serif;
+        }
+        /* Style for the active sidebar link */
+        .sidebar-link.active {
+            background-color: #e0f2fe; /* light blue for active link background */
+            color: #0d6efd; /* dark blue for active link text */
+            font-weight: 600;
+        }
+        .prose img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-top: 1em;
+            margin-bottom: 1em;
+        }
+        .prose h1, .prose h2, .prose h3, .prose h4, .prose h5, .prose h6 {
+            color: #1a202c; /* Darker heading color for contrast */
+            margin-top: 1.5em;
+            margin-bottom: 0.5em;
+        }
+        .prose p {
+            margin-bottom: 1em;
+        }
+        .prose ul, .prose ol {
+            margin-left: 1.5em;
+            margin-bottom: 1em;
+        }
+        .prose ul li, .prose ol li {
+            margin-bottom: 0.5em;
+        }
+        .prose a {
+            color: #0d6efd;
+            text-decoration: underline;
+        }
+        .prose a:hover {
+            color: #0a58ca;
+        }
+        /* Custom styles for the business sections */
+        .section-box {
+            background-color: #ffffff; /* White background for sections */
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .section-box h3 {
+            color: #1e293b; /* Dark text for section titles */
+            margin-top: 0;
+            margin-bottom: 0.75rem;
+        }
+        .section-box p, .section-box ul {
+            color: #475569; /* Slightly lighter text for section content */
+        }
+    </style>
+</head>
+<body class="flex h-screen overflow-hidden">
+    <aside class="w-64 bg-gray-50 p-4 shadow-lg overflow-y-auto flex-shrink-0">
+        <div class="text-2xl font-bold text-gray-800 mb-6">Businesspedia</div>
+        <nav>
+            <ul>
+                <li class="mb-2">
+                    <a href="#/home" class="block px-4 py-2 rounded-md text-gray-600 hover:bg-gray-100 hover:text-gray-800 transition-colors sidebar-link" data-page="home">Home</a>
+                </li>
+                <li class="mb-2">
+                    <div class="text-sm font-semibold text-gray-500 uppercase mb-2">Categories</div>
+                    <ul>
+                        <li><a href="#/business/retail-business" class="block px-4 py-2 rounded-md text-gray-600 hover:bg-gray-100 hover:text-gray-800 transition-colors sidebar-link" data-page="retail-business">Retail</a></li>
+                        <li><a href="#/business/service-business" class="block px-4 py-2 rounded-md text-gray-600 hover:bg-gray-100 hover:text-gray-800 transition-colors sidebar-link" data-page="service-business">Service</a></li>
+                        <li><a href="#/business/manufacturing-business" class="block px-4 py-2 rounded-md text-gray-600 hover:bg-gray-100 hover:text-gray-800 transition-colors sidebar-link" data-page="manufacturing-business">Manufacturing</a></li>
+                        <li><a href="#/business/e-commerce-business" class="block px-4 py-2 rounded-md text-gray-600 hover:bg-gray-100 hover:text-gray-800 transition-colors sidebar-link" data-page="e-commerce-business">E-commerce</a></li>
+                        <li><a href="#/business/tech-startups" class="block px-4 py-2 rounded-md text-gray-600 hover:bg-gray-100 hover:text-gray-800 transition-colors sidebar-link" data-page="tech-startups">Tech Startups</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </aside>
+
+    <main class="flex-1 overflow-y-auto p-8 relative" id="main-content">
+        <h1 class="text-3xl font-bold text-gray-800 mb-6">Welcome to Businesspedia!</h1>
+        <p class="text-gray-700 leading-relaxed">Select a business category from the sidebar to learn more about different business types, their characteristics, challenges, and opportunities.</p>
+        <div class="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="bg-white p-6 rounded-lg shadow">
+                <h2 class="text-xl font-semibold text-gray-800 mb-3">Explore Categories</h2>
+                <p class="text-gray-700">Dive into various business sectors like Retail, Service, Manufacturing, E-commerce, and Tech Startups.</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow">
+                <h2 class="text-xl font-semibold text-gray-800 mb-3">Key Insights</h2>
+                <p class="text-gray-700">Learn about startup costs, market analysis, business models, and legal considerations.</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow">
+                <h2 class="text-xl font-semibold text-gray-800 mb-3">Stay Updated</h2>
+                <p class="text-gray-700">Our content is regularly updated to provide you with the latest information and trends.</p>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const mainContent = document.getElementById('main-content');
+            const sidebarLinks = document.querySelectorAll('.sidebar-link');
+
+            // --- EMBEDDED BUSINESS DATA ---
+            // This data replaces the need for a server-side API call.
+            const BUSINESS_DATA = [
+                {
+                    "category": "Retail",
+                    "type": "Retail Business",
+                    "title": "Retail Business: A Comprehensive Guide",
+                    "last_updated": "15 Jul, 2025",
+                    "sections": {
+                        "overview": {
+                            "title": "Overview / Introduction",
+                            "content": "<p>A <strong>retail business</strong> sells goods directly to consumers. It's a diverse sector from local shops to online giants. Industry trends include e-commerce growth and personalized shopping experiences. Ideal for individuals with strong customer service and inventory management skills.</p><ul><li><strong>Industry Relevance:</strong> High, as it's a fundamental part of the economy.</li><li><strong>Ideal For:</strong> Individuals with sales experience, good organizational skills, and a passion for products.</li></ul>"
+                        },
+                        "business_snapshot": {
+                            "title": "Business Snapshot",
+                            "content": "<p>Estimated Startup Cost: Mid-High budget (depending on physical store vs online). Potential Revenue: Varies greatly. Key Metrics: Customer acquisition cost, average transaction value, inventory turnover.</p>"
+                        },
+                        "market_analysis": {
+                            "title": "Market Analysis",
+                            "content": "<p>Key trends include the rise of e-commerce, demand for personalized shopping experiences, and focus on sustainable products. Market research involves understanding consumer behavior, competitive landscape, and niche opportunities.</p>"
+                        },
+                        "business_model": {
+                            "title": "Business Model",
+                            "content": "<p>Revenue streams from product sales. Cost structure includes inventory, rent (if physical), marketing, and staff wages. Key activities: purchasing, marketing, sales, customer service.</p>"
+                        },
+                        "legal_compliance": {
+                            "title": "Legal & Compliance",
+                            "content": "<p>Licenses and permits vary by location and product type (e.g., food, alcohol). Consumer protection laws, product safety regulations, and data privacy (for online stores) are crucial.</p>"
+                        },
+                        "funding_options": {
+                            "title": "Funding Options",
+                            "content": "<p>Common options: small business loans, lines of credit, crowdfunding, personal savings. Venture capital is less common unless it's a highly scalable tech-driven retail concept.</p>"
+                        },
+                        "risks_challenges": {
+                            "title": "Risks & Challenges",
+                            "content": "<p>High competition, inventory management issues, changing consumer trends, economic downturns, and supply chain disruptions.</p>"
+                        },
+                        "scaling_business": {
+                            "title": "Scaling the Business",
+                            "content": "<p>Strategies include expanding product lines, opening new locations (physical or online), franchising, and improving supply chain efficiency.</p>"
+                        },
+                        "roi_projections": {
+                            "title": "ROI & Financial Projections",
+                            "content": "<p>Typically involves projecting sales, cost of goods sold, operating expenses, and net profit. Breakeven analysis is crucial. ROI can be measured in terms of profit margins and return on investment capital.</p>"
+                        },
+                        "success_stories": {
+                            "title": "Success Stories & Case Studies",
+                            "content": "<p>Content coming soon for this section.</p>"
+                        },
+                        "free_resources": {
+                            "title": "Free Resources & Templates",
+                            "content": "<p>Content coming soon for this section.</p>"
+                        },
+                        "faqs": {
+                            "title": "FAQs",
+                            "content": "<p>Content coming soon for this section.</p>"
+                        },
+                        "get_started": {
+                            "title": "Get Started Section",
+                            "content": "<p>Content coming soon for this section.</p>"
+                        }
+                    }
+                },
+                {
+                    "category": "Service",
+                    "type": "Service Business",
+                    "title": "Service Business: An In-Depth Look",
+                    "last_updated": "18 Jul, 2025",
+                    "sections": {
+                        "overview": {
+                            "title": "Overview / Introduction",
+                            "content": "<p>A <strong>service business</strong> provides intangible products, i.e., services, to customers. This can range from consulting to healthcare, education, and professional services. Key aspects include client relationships, quality of service, and human capital.</p><ul><li><strong>Industry Relevance:</strong> High, as services form a significant portion of modern economies.</li><li><strong>Ideal For:</strong> Individuals with specialized skills, strong communication, and a client-focused approach.</li></ul>"
+                        },
+                        "business_snapshot": {
+                            "title": "Business Snapshot",
+                            "content": "<p>Estimated Startup Cost: Low-Mid (often less inventory, more skill-based). Potential Revenue: Scalable based on client base and service offerings. Key Metrics: Client retention rate, service utilization, hourly rates, client satisfaction.</p>"
+                        },
+                        "market_analysis": {
+                            "title": "Market Analysis",
+                            "content": "<p>Trends include digital transformation of services, subscription models, and personalized experiences. Market research focuses on identifying unmet needs, target demographics, and competitor service offerings.</p>"
+                        },
+                        "business_model": {
+                            "title": "Business Model",
+                            "content": "<p>Revenue from service fees (hourly, project-based, retainer). Cost structure mainly involves labor, marketing, and operational overhead. Key activities: service delivery, client acquisition, relationship management.</p>"
+                        },
+                        "legal_compliance": {
+                            "title": "Legal & Compliance",
+                            "content": "<p>Professional licenses (if applicable), contracts (client agreements, NDAs), liability insurance, and data privacy regulations are important.</p>"
+                        },
+                        "funding_options": {
+                            "title": "Funding Options",
+                            "content": "<p>Often bootstrapped, personal savings, small business loans. Less likely to attract venture capital unless the service is tech-enabled and highly scalable (SaaS).</p>"
+                        },
+                        "risks_challenges": {
+                            "title": "Risks & Challenges",
+                            "content": "<p>Client acquisition, managing client expectations, talent retention, scalability issues without compromising quality, and economic downturns affecting demand for services.</p>"
+                        },
+                        "scaling_business": {
+                            "title": "Scaling the Business",
+                            "content": "<p>Strategies include hiring more skilled professionals, developing standardized service packages, leveraging technology (e.g., automation, platforms), and expanding geographically.</p>"
+                        },
+                        "roi_projections": {
+                            "title": "ROI & Financial Projections",
+                            "content": "<p>Focus on billable hours, project profitability, and client lifetime value. Projections involve forecasting service demand, operational costs, and profit margins. ROI typically measured by client satisfaction and repeat business.</p>"
+                        },
+                        "success_stories": {
+                            "title": "Success Stories & Case Studies",
+                            "content": "<p>Content coming soon for this section.</p>"
+                        },
+                        "free_resources": {
+                            "title": "Free Resources & Templates",
+                            "content": "<p>Content coming soon for this section.</p>"
+                        },
+                        "faqs": {
+                            "title": "FAQs",
+                            "content": "<p>Content coming soon for this section.</p>"
+                        },
+                        "get_started": {
+                            "title": "Get Started Section",
+                            "content": "<p>Content coming soon for this section.</p>"
+                        }
+                    }
+                },
+                {
+                    "category": "Manufacturing",
+                    "type": "Manufacturing Business",
+                    "title": "Manufacturing Business: From Raw to Product",
+                    "last_updated": "20 Jul, 2025",
+                    "sections": {
+                        "overview": {
+                            "title": "Overview / Introduction",
+                            "content": "<p>A <strong>manufacturing business</strong> produces goods from raw materials or components using various processes. This sector is capital-intensive, focusing on efficiency, quality control, and supply chain management. It spans from small workshops to large factories.</p><ul><li><strong>Industry Relevance:</strong> High, forms the backbone of goods-producing economies.</li><li><strong>Ideal For:</strong> Individuals with engineering knowledge, operational management skills, and a focus on production efficiency.</li></ul>"
+                        },
+                        "business_snapshot": {
+                            "title": "Business Snapshot",
+                            "content": "<p>Estimated Startup Cost: High (machinery, factory space, raw materials). Potential Revenue: High volume, potentially lower margins per unit. Key Metrics: Production efficiency, unit cost, inventory turnover, quality control rates.</p>"
+                        },
+                        "market_analysis": {
+                            "title": "Market Analysis",
+                            "content": "<p>Trends include automation (Industry 4.0), sustainable manufacturing, and customization. Market research involves demand forecasting, supply chain analysis, and competitor analysis of production capacities.</p>"
+                        },
+                        "business_model": {
+                            "title": "Business Model",
+                            "content": "<p>Revenue from product sales. High fixed costs (equipment, facilities) and variable costs (raw materials, labor). Key activities: R&D, production, quality control, logistics, sales.</p>"
+                        },
+                        "legal_compliance": {
+                            "title": "Legal & Compliance",
+                            "content": "<p>Environmental regulations, worker safety (OSHA), product liability laws, intellectual property protection (patents), and import/export regulations are critical.</p>"
+                        },
+                        "funding_options": {
+                            "title": "Funding Options",
+                            "content": "<p>Often requires significant capital: bank loans, venture capital (for innovative manufacturing), government grants, and asset-based lending.</p>"
+                        },
+                        "risks_challenges": {
+                            "title": "Risks & Challenges",
+                            "content": "<p>High capital investment, complex supply chains, quality control issues, intense competition, technological obsolescence, and regulatory changes.</p>"
+                        },
+                        "scaling_business": {
+                            "title": "Scaling the Business",
+                            "content": "<p>Strategies include increasing production capacity, optimizing manufacturing processes, expanding product lines, entering new markets, and automating operations.</p>"
+                        },
+                        "roi_projections": {
+                            "title": "ROI & Financial Projections",
+                            "content": "<p>Focus on production volume, unit costs, and economies of scale. Projections involve detailed breakdown of CapEx and OpEx. ROI measured by efficiency gains, market share, and long-term profitability.</p>"
+                        },
+                        "success_stories": {
+                            "title": "Success Stories & Case Studies",
+                            "content": "<p>Content coming soon for this section.</p>"
+                        },
+                        "free_resources": {
+                            "title": "Free Resources & Templates",
+                            "content": "<p>Content coming soon for this section.</p>"
+                        },
+                        "faqs": {
+                            "title": "FAQs",
+                            "content": "<p>Content coming soon for this section.</p>"
+                        },
+                        "get_started": {
+                            "title": "Get Started Section",
+                            "content": "<p>Content coming soon for this section.</p>"
+                        }
+                    }
+                },
+                {
+                    "category": "E-commerce",
+                    "type": "E-commerce Business",
+                    "title": "E-commerce Business: Selling Online",
+                    "last_updated": "21 Jul, 2025",
+                    "sections": {
+                        "overview": {
+                            "title": "Overview / Introduction",
+                            "content": "<p>An <strong>e-commerce business</strong> conducts transactions over the internet, selling goods or services directly to consumers online. It's characterized by global reach, lower overheads than physical stores, and reliance on digital marketing and logistics.</p><ul><li><strong>Industry Relevance:</strong> Extremely high and growing rapidly.</li><li><strong>Ideal For:</strong> Individuals with digital marketing skills, tech savviness, and an understanding of online consumer behavior.</li></ul>"
+                        },
+                        "business_snapshot": {
+                            "title": "Business Snapshot",
+                            "content": "<p>Estimated Startup Cost: Low-Mid (website, inventory, marketing). Potential Revenue: Highly scalable. Key Metrics: Conversion rate, customer acquisition cost, average order value, website traffic.</p>"
+                        },
+                        "market_analysis": {
+                            "title": "Market Analysis",
+                            "content": "<p>Trends include mobile commerce, social commerce, personalized recommendations, and sustainable packaging. Market research involves identifying niche products, target demographics, and analyzing online competitors.</p>"
+                        },
+                        "business_model": {
+                            "title": "Business Model",
+                            "content": "<p>Revenue from online product/service sales. Costs include platform fees, digital marketing, logistics, and inventory. Key activities: website management, marketing, order fulfillment, customer support.</p>"
+                        },
+                        "legal_compliance": {
+                            "title": "Legal & Compliance",
+                            "content": "<p>Website accessibility (ADA), data privacy (GDPR, CCPA), consumer protection laws, tax compliance (sales tax), and secure payment processing are vital.</p>"
+                        },
+                        "funding_options": {
+                            "title": "Funding Options",
+                            "content": "<p>Often bootstrapped, small business loans, lines of credit, or e-commerce specific funding platforms. Venture capital is possible for highly innovative or rapidly scaling e-commerce platforms.</p>"
+                        },
+                        "risks_challenges": {
+                            "title": "Risks & Challenges",
+                            "content": "<p>Intense online competition, cybersecurity threats, complex logistics and shipping, managing customer returns, and fluctuating digital marketing costs.</p>"
+                        },
+                        "scaling_business": {
+                            "title": "Scaling the Business",
+                            "content": "<p>Strategies include expanding product catalog, entering new geographic markets, optimizing website conversion, leveraging social media, and improving supply chain efficiency.</p>"
+                        },
+                        "roi_projections": {
+                            "title": "ROI & Financial Projections",
+                            "content": "<p>Focus on customer lifetime value, conversion rates, and profit per order. Projections involve forecasting website traffic, sales volume, and marketing spend. ROI measured by net profit margin and customer acquisition cost efficiency.</p>"
+                        },
+                        "success_stories": {
+                            "title": "Success Stories & Case Studies",
+                            "content": "<p>Content coming soon for this section.</p>"
+                        },
+                        "free_resources": {
+                            "title": "Free Resources & Templates",
+                            "content": "<p>Content coming soon for this section.</p>"
+                        },
+                        "faqs": {
+                            "title": "FAQs",
+                            "content": "<p>Content coming soon for this section.</p>"
+                        },
+                        "get_started": {
+                            "title": "Get Started Section",
+                            "content": "<p>Content coming soon for this section.</p>"
+                        }
+                    }
+                },
+                {
+                    "category": "Tech Startups",
+                    "type": "Tech Startups",
+                    "title": "The World of Tech Startups",
+                    "last_updated": "22 Jul, 2025",
+                    "sections": {
+                        "overview": {
+                            "title": "Overview / Introduction",
+                            "content": "<p>A <strong>tech startup</strong> is a company whose purpose is to bring technology products or services to market. These companies are generally newly created and are in a phase of development and research for markets.</p><h3 class=\"text-xl font-semibold text-gray-200 mt-6 mb-3\">Key Features of Tech Startups</h3><ul class=\"list-disc list-inside space-y-2 text-gray-400\">             <li><strong>Innovation:</strong> Focused on creating new technologies or innovative applications of existing tech.</li>             <li><strong>Scalability:</strong> Designed for rapid growth with a large potential market.</li>             <li><strong>Funding:</strong> Often rely on venture capital or angel investors to fund growth.</li>             <li><strong>Agile & Lean:</strong> Tend to operate with a flexible and iterative approach to product development.</li>         </ul>"
+                        },
+                        "business_snapshot": {
+                            "title": "Business Snapshot",
+                            "content": "<p>Estimated Startup Cost: Variable (can be low for software, high for hardware). Potential Revenue: Exponential growth if product-market fit is achieved. Key Metrics: User acquisition cost, customer lifetime value, churn rate, burn rate, runway.</p>"
+                        },
+                        "market_analysis": {
+                            "title": "Market Analysis",
+                            "content": "<p>Trends include AI, blockchain, SaaS, cloud computing, and cybersecurity. Market research focuses on identifying unmet technological needs, early adopters, and disruption opportunities.</p>"
+                        },
+                        "business_model": {
+                            "title": "Business Model",
+                            "content": "<p>Revenue from software subscriptions (SaaS), licensing, ad revenue, or direct product sales. High upfront R&D costs, lower marginal costs. Key activities: product development, fundraising, user acquisition, talent recruitment.</p>"
+                        },
+                        "legal_compliance": {
+                            "title": "Legal & Compliance",
+                            "content": "<p>Intellectual property protection (patents, copyrights), data privacy (GDPR, CCPA), terms of service, venture capital agreements, and compliance with industry-specific tech regulations are crucial.</p>"
+                        },
+                        "funding_options": {
+                            "title": "Funding Options",
+                            "content": "<p>Primarily angel investors, venture capital firms, seed funding, and increasingly, crowdfunding platforms. Often involves multiple funding rounds (Seed, Series A, B, etc.).</p>"
+                        },
+                        "risks_challenges": {
+                            "title": "Risks & Challenges",
+                            "content": "<p>High failure rate, intense competition, rapid technological change, difficulty in achieving product-market fit, securing funding, and scaling effectively.</p>"
+                        },
+                        "scaling_business": {
+                            "title": "Scaling the Business",
+                            "content": "<p>Strategies include expanding user base, developing new features/products, entering new markets, forming strategic partnerships, and continuously optimizing operations for efficiency.</p>"
+                        },
+                        "roi_projections": {
+                            "title": "ROI & Financial Projections",
+                            "content": "<p>Focus on user growth, revenue per user, and path to profitability. Projections are often ambitious and based on market penetration and adoption rates. ROI for investors is typically an exit strategy (acquisition or IPO).</p>"
+                        },
+                        "success_stories": {
+                            "title": "Success Stories & Case Studies",
+                            "content": "<p>Content coming soon for this section.</p>"
+                        },
+                        "free_resources": {
+                            "title": "Free Resources & Templates",
+                            "content": "<p>Content coming soon for this section.</p>"
+                        },
+                        "faqs": {
+                            "title": "FAQs",
+                            "content": "<p>Content coming soon for this section.</p>"
+                        },
+                        "get_started": {
+                            "title": "Get Started Section",
+                            "content": "<p>Content coming soon for this section.</p>"
+                        }
+                    }
+                }
+            ];
+
+            // --- JAVASCRIPT LOGIC ---
+            const renderHomePage = () => {
+                mainContent.innerHTML = `
+                    <h1 class="text-3xl font-bold text-gray-800 mb-6">Welcome to Businesspedia!</h1>
+                    <p class="text-gray-700 leading-relaxed">Select a business category from the sidebar to learn more about different business types, their characteristics, challenges, and opportunities.</p>
+                    <div class="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div class="bg-white p-6 rounded-lg shadow">
+                            <h2 class="text-xl font-semibold text-gray-800 mb-3">Explore Categories</h2>
+                            <p class="text-gray-700">Dive into various business sectors like Retail, Service, Manufacturing, E-commerce, and Tech Startups.</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-lg shadow">
+                            <h2 class="text-xl font-semibold text-gray-800 mb-3">Key Insights</h2>
+                            <p class="text-gray-700">Learn about startup costs, market analysis, business models, and legal considerations.</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-lg shadow">
+                            <h2 class="text-xl font-semibold text-gray-800 mb-3">Stay Updated</h2>
+                            <p class="text-gray-700">Our content is regularly updated to provide you with the latest information and trends.</p>
+                        </div>
+                    </div>
+                `;
+            };
+
+            const loadBusinessContent = async (type) => {
+                const mainContent = document.getElementById('main-content');
+                mainContent.innerHTML = `<p class="text-center text-lg text-gray-700">Loading ${type.replace(/-/g, ' ')} content...</p>`;
+
+                // Find the business data directly from the embedded BUSINESS_DATA
+                const standardizedRequestedType = type.replace(/-/g, ' ').toLowerCase();
+
+                const business = BUSINESS_DATA.find(b => b.type.toLowerCase() === standardizedRequestedType);
+
+                if (business) {
+                    renderBusinessPage(business);
+                } else {
+                    mainContent.innerHTML = `<div class="p-8 text-center text-red-600">Error: Business type "${type.replace(/-/g, ' ')}" not found in embedded data.</div>`;
+                    console.error('Error loading business content: Business type not found in embedded data.');
+                }
+            };
+
+            const router = () => {
+                const hash = window.location.hash.slice(1) || '/home'; // Get hash, remove #, default to /home
+                let pathParts = hash.split('/');
+                let route = pathParts[1]; // e.g., "business", "home"
+                let param = pathParts[2]; // e.g., "retail-business"
+
+                // Update active link in sidebar
+                updateActiveLink(route === 'business' ? param : route);
+
+                if (route === 'home') {
+                    renderHomePage();
+                } else if (route === 'business' && param) {
+                    loadBusinessContent(param);
+                } else {
+                    // Default or error page
+                    mainContent.innerHTML = `<div class="text-center p-8 text-gray-700">
+                                                <h1 class="text-3xl font-bold mb-4">Page Not Found</h1>
+                                                <p>The content you are looking for does not exist. Please navigate using the sidebar.</p>
+                                            </div>`;
+                }
+            };
+
+            const renderBusinessPage = (data) => {
+                let sectionsHtml = '';
+                for (const key in data.sections) {
+                    if (data.sections.hasOwnProperty(key)) {
+                        const section = data.sections[key];
+                        sectionsHtml += `
+                            <div class="section-box">
+                                <h3 class="text-2xl font-semibold text-gray-800 mb-3">${section.title}</h3>
+                                <div class="text-gray-700 leading-relaxed prose max-w-none">
+                                    ${section.content}
+                                </div>
+                            </div>
+                        `;
+                    }
+                }
+
+                mainContent.innerHTML = `
+                    <div class="max-w-4xl mx-auto">
+                        <div class="flex justify-between items-center mb-6">
+                            <div>
+                                <h1 class="text-3xl font-bold text-gray-800">${data.title}</h1>
+                                <p class="text-gray-500 text-sm">Last Updated: ${data.last_updated}</p>
+                            </div>
+                            <div class="text-gray-600 space-x-4">
+                                <button class="hover:text-gray-900"><i class="fa-solid fa-print"></i></button>
+                                <button class="hover:text-gray-900"><i class="fa-solid fa-share-nodes"></i></button>
+                                <button class="hover:text-gray-900"><i class="fa-solid fa-bookmark"></i></button>
+                                <button class="hover:text-gray-900"><i class="fa-solid fa-plus"></i></button>
+                                <button class="hover:text-gray-900"><i class="fa-solid fa-download"></i></button>
+                            </div>
+                        </div>
+
+                        ${sectionsHtml}
+                    </div>
+                `;
+            };
+
+            // --- UI Helper Functions ---
+            const updateActiveLink = (page) => {
+                sidebarLinks.forEach(link => {
+                    // Remove 'business/' prefix for comparison if present
+                    const linkPage = link.dataset.page.startsWith('business/') ? link.dataset.page.split('/')[1] : link.dataset.page;
+                    const currentPage = page.startsWith('business/') ? page.split('/')[1] : page;
+
+                    if (linkPage === currentPage) {
+                        link.classList.add('active');
+                    } else {
+                        link.classList.remove('active');
+                    }
+                });
+            };
+
+
+            // --- Event Listeners ---
+            window.addEventListener('hashchange', router);
+            window.addEventListener('load', router); // Handle initial page load
+
+            // Make all links trigger the router, even if they are placeholders
+            document.body.addEventListener('click', (e) => {
+                const link = e.target.closest('a');
+                if (link && link.getAttribute('href').startsWith('#')) {
+                    e.preventDefault();
+                    // Update hash to trigger router
+                    window.location.hash = link.getAttribute('href').slice(1); // Remove '#', e.g., #/home -> /home
+                }
+            });
+        });
+    </script>
+</body>
+</html>
